@@ -21,3 +21,9 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+
+Route::middleware(['admin', 'auth', 'verified'])->group(function () {
+    Route::get('/admin', function () {
+        return 'halaman Admin';
+    });
+});
